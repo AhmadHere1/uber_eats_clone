@@ -116,7 +116,7 @@ const RestuarantItems = (props) => {
         <TouchableOpacity activeOpacity={1}
             style={{
                 marginTop: 10,
-                padding: 10,
+                padding: 1,
                 backgroundColor: 'white',
 
             }}
