@@ -6,7 +6,7 @@ import { Catagories } from '../components/HomeScreen/Catagories'
 import { localRestuarants, RestuarantItems } from '../components/HomeScreen/RestuarantItems'
 import { BottomTabs } from '../components/HomeScreen/BottomTabs'
 
-export default function Home() {
+const Home = ({ navigation }) => {
     const [restuarantData, setRestuarantData] = useState(localRestuarants);
     return (
         <View style={{ backgroundColor: '#eeee', flex: 1 }}>
@@ -17,14 +17,15 @@ export default function Home() {
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Catagories />
-                <RestuarantItems restuarantData={restuarantData} />
-
-
+                <RestuarantItems
+                    navigation={navigation}
+                    restuarantData={restuarantData} />
             </ScrollView>
             <BottomTabs />
         </View>
     )
 }
+export { Home }
 
 
 

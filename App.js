@@ -1,14 +1,14 @@
 
+import { NativeStackView } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
-import Home from './src/screens/Home';
-import { RestuarantDetailScreen } from './src/screens/RestuarantDetailScreen';
+import { NavContainer } from './src/services/navigation';
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Home />
-       */}
-      <RestuarantDetailScreen />
+      <NavContainer />
+
     </View>
   );
 }

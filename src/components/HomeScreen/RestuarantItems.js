@@ -111,26 +111,36 @@ const RestuarantInfo = (props) => (
 
 )
 
-const RestuarantItems = (props) => {
+const RestuarantItems = ({ navigation, ...props }) => {
     return (
-        <TouchableOpacity activeOpacity={1}
-            style={{
-                marginTop: 10,
-                padding: 1,
-                backgroundColor: 'white',
-
-            }}
-        >
+        <>
             {props.restuarantData.map((restaurant, index) => (
-                <View
+                <TouchableOpacity
                     key={index}
-                >
+                    activeOpacity={0.7} style={{ marginTop: 10, padding: 1, backgroundColor: 'white' }}
+                    onPress={() => navigation.navigate('RestuarantDetailScreen',
+                        {
+                            name: restaurant.name,
+                            address: restaurant.address,
+                            image: restaurant.image,
+                            rating: restaurant.rating,
+                            distance: restaurant.distance,
+                            price: restaurant.price,
+                            id: restaurant.id,
+                            reviews: restaurant.reviews
 
-                    <RestaurantImage image={restaurant.image} />
-                    <RestuarantInfo name={restaurant.name} rating={restaurant.rating} />
-                </View>
+
+
+                        })}>
+
+                    <View>
+
+                        <RestaurantImage image={restaurant.image} />
+                        <RestuarantInfo name={restaurant.name} rating={restaurant.rating} />
+                    </View>
+                </TouchableOpacity>
             ))}
-        </TouchableOpacity>
+        </>
     )
 }
 

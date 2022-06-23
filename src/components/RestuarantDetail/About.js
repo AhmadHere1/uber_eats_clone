@@ -1,18 +1,18 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+// import { ViewCart } from './ViewCart'
 // import { Divider } from 'react-native-paper'
 const image = "https://cdn.vox-cdn.com/thumbor/a9RsFUZjVZ-7ll3Rr2XWjbhUtx8=/47x0:772x544/920x613/filters:focal(47x0:772x544):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/38811448/threegreat9lahoreexterior-1.0.jpg"
 const title = "Al Khan Restuarant and Fast Food Point"
 const description = "Comfort Meal -$$ 🤷‍♂️✨5"
-const About = () => {
+const About = (props) => {
     return (
         <View>
+
             <RestuarantImage image={image} />
             <RestuarantTitle title={title} />
             <RestuarantDescription description={description} />
             <Divider />
-
-
         </View>
     )
 }
