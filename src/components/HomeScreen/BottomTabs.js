@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react'
 
-const BottomTabs = () => {
+const BottomTabs = ({ navigation }) => {
     return (
 
         <View style={styles.ContainerIcon}>
@@ -42,6 +42,7 @@ const BottomTabs = () => {
             </View>
             <View style={styles.tabsContainer}>
                 <TouchableOpacity>
+
                     <Ionicons name="person" size={30} color='grey'
                         style={styles.icon}
                     />
