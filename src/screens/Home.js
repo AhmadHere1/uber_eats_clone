@@ -21,7 +21,7 @@ const Home = ({ navigation }) => {
                     navigation={navigation}
                     restuarantData={restuarantData} />
             </ScrollView>
-            <BottomTabs />
+            <BottomTabs navigation={navigation} />
         </View>
     )
 }

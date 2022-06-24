@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { OrderItem } from './OrderItem';
 import { firebase } from '../../db/firebase_config';
 
-const ViewCart = () => {
+const ViewCart = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     // here we are making these functions for calculating and summing up the cost
@@ -24,8 +24,9 @@ const ViewCart = () => {
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 
         })
-        setModalVisible(false)
-    }
+        setModalVisible(false);
+        // navigation.navigate("OrderComplete");
+    };
     const checkOutModelContent = () => {
         return (
             <View style={styles.modalContainer}>
