@@ -11,7 +11,7 @@ let cartReducer = (state = defaultState, action) => {
                 let newState = { ...state };
                 newState.selectedItems = {
                     items: [...state.selectedItems.items, action.payload],
-                    restuarantName: action.payLoad.restuarantName
+                    restuarantName: action.restuarantName
 
                 }
                 console.log(newState);

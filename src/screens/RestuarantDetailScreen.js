@@ -10,8 +10,8 @@ const RestuarantDetailScreen = ({ route, navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             <About route={route} />
-            <Menu />
-            <ViewCart navigation={navigation} />
+            <Menu restuarantName={route.params.name} />
+            <ViewCart navigation={navigation} restuarantName={route.params.name} />
         </View>
 
     )

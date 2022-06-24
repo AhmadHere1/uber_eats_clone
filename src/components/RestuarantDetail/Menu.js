@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
-import React from 'react'
-import BouncyCheckbox from 'react-native-bouncy-checkbox'
+import React from 'react';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const foods = [
     {
-        title: 'Pasta Recipe with Meatballs',
+        title: 'Pasta Recipe ',
         image: 'https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg?quality=90&resize=556,505',
         description: 'Delicious pasta dishes from classic spaghetti Bolognese to lasagne and linguine. Find the perfect pasta recipe for midweek meals as well as easy pasta dishes you can rustle up using your storecupboard.',
         rating: 4.5,
@@ -12,7 +14,7 @@ const foods = [
         location: 'Lahore'
     },
     {
-        title: 'Pakistan Restuarant',
+        title: 'Special Shawarma',
         image: 'https://www.pinkvilla.com/imageresize/cover-image_1_5.jpg?width=752&format=webp&t=pvorg',
         description: 'Sit back and tuck into a big bowl of pasta alla vodka, a creamy tomato pasta with – as you can guess – vodka, which balances out the intense flavours',
         rating: 4.5,
@@ -20,7 +22,7 @@ const foods = [
         location: 'Lahore'
     },
     {
-        title: 'Lahore grill and fish',
+        title: 'Lahori Fish',
         image: 'https://media.self.com/photos/57d8952946d0cb351c8c50c9/1:1/w_855,h_855,c_limit/DELICIOUS-1-POT-Lentil-and-Black-Bean-Chili-Smoky-hearty-PROTEIN-and-fiber-packed-vegan-glutenfree-lentils-chili-healthy-recipe2.jpg',
         description: 'Enjoy this gooey cheese and chicken pasta bake for the ultimate weekday family dinner. Serve straight from the dish with a dressed green salad',
         rating: 4.5,
@@ -28,7 +30,7 @@ const foods = [
         location: 'Lahore'
     },
     {
-        title: 'Lasani Hotels',
+        title: 'Lasani Pizza',
         image: 'https://recipe52.com/wp-content/uploads/2020/10/Pakistani-recipes-pin-it-1.jpg',
         description: 'Make this creamy mushroom pasta dish on days when you need a big bowl of comfort. Cream, parmesan, white wine, lemon zest and parsley make this a rich and flavourful dinner',
         rating: 4.5,
@@ -36,7 +38,7 @@ const foods = [
         location: 'Lahore'
     },
     {
-        title: 'Pasta Recipe with Meatballs',
+        title: 'Pasta ',
         image: 'https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg?quality=90&resize=556,505',
         description: 'Delicious pasta dishes from classic spaghetti Bolognese to lasagne and linguine. Find the perfect pasta recipe for midweek meals as well as easy pasta dishes you can rustle up using your storecupboard.',
         rating: 4.5,
@@ -45,7 +47,7 @@ const foods = [
 
     },
     {
-        title: 'Pakistan Restuarant',
+        title: 'Pizzaaaaaa',
         image: 'https://www.pinkvilla.com/imageresize/cover-image_1_5.jpg?width=752&format=webp&t=pvorg',
         description: 'Sit back and tuck into a big bowl of pasta alla vodka, a creamy tomato pasta with – as you can guess – vodka, which balances out the intense flavours',
         rating: 4.5,
@@ -53,7 +55,7 @@ const foods = [
         location: 'Lahore'
     },
     {
-        title: 'Lahore grill and fish',
+        title: ' Burger',
         image: 'https://media.self.com/photos/57d8952946d0cb351c8c50c9/1:1/w_855,h_855,c_limit/DELICIOUS-1-POT-Lentil-and-Black-Bean-Chili-Smoky-hearty-PROTEIN-and-fiber-packed-vegan-glutenfree-lentils-chili-healthy-recipe2.jpg',
         description: 'Enjoy this gooey cheese and chicken pasta bake for the ultimate weekday family dinner. Serve straight from the dish with a dressed green salad',
         rating: 4.5,
@@ -61,14 +63,14 @@ const foods = [
         location: 'Lahore'
     },
     {
-        title: 'Lasani Hotels',
+        title: 'Mint',
         image: 'https://recipe52.com/wp-content/uploads/2020/10/Pakistani-recipes-pin-it-1.jpg',
         description: 'Make this creamy mushroom pasta dish on days when you need a big bowl of comfort. Cream, parmesan, white wine, lemon zest and parsley make this a rich and flavourful dinner',
         rating: 4.5,
         price: '$70',
         location: 'Lahore'
     },
-]
+];
 const FoodInfo = (props) => (
     <View style={styles.container}>
         <Text style={styles.textStyling}>{props.foods.title}</Text>
@@ -93,7 +95,19 @@ const FoodImage = (props) => (
     </View>
 )
 
-const Menu = () => {
+const Menu = ({ restuarantName }) => {
+    const disPatch = useDispatch();
+    const selectItem = (item, checkBoxValue) => {
+        disPatch({
+            type: 'ADD_TO_CART',
+            payload: item,
+            restuarantName: restuarantName,
+            checkBoxValue: checkBoxValue,
+        })
+    };
+    const cartItems = useSelector(state => state.cartReducer.selectedItems.items);
+    const isFoodInCart = (food, cartItems) =>
+        (Boolean(cartItems.find((item) => item.title === food.title)));
     return (
         <ScrollView showsVerticalScrollIndicator={true} >
             {foods.map((food, index) => (
@@ -101,7 +115,6 @@ const Menu = () => {
                     <View style={styles.menuItemStyle}>
                         <BouncyCheckbox
                             iconStyle=
-
                             {{
                                 width: 20,
                                 height: 20,
@@ -111,12 +124,14 @@ const Menu = () => {
                                 marginHorizontal: 10,
                             }}
                             fillColor="green"
+                            onPress={(checkBoxValue) => selectItem(food, checkBoxValue)}
+                            isChecked={isFoodInCart(food, cartItems)}
 
                         />
                         <FoodInfo foods={food} />
                         <FoodImage foods={food} />
                     </View>
-                    {/* this is for divider line as somehow my divider from react native elemets is not working. */}
+                    {/* this is for divider line as somehow my divider from react native elements is not working. */}
                     <View style={{
                         height: 1,
                         backgroundColor: "#ddd",
@@ -131,6 +146,7 @@ const Menu = () => {
         </ScrollView >
     )
 }
+
 
 export { Menu }
 
@@ -168,7 +184,7 @@ const styles = StyleSheet.create({
         width: 230,
         height: 180,
 
-    }
+    },
 
 
 
