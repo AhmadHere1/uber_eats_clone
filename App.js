@@ -1,7 +1,10 @@
 
-import { NativeStackView } from '@react-navigation/native-stack';
+import "./ignoreWarnings";
+
 import { StyleSheet, Text, View } from 'react-native';
-import { NavContainer } from './src/services/navigation';
+import { NavContainer } from './src/navigation/services/Index';
+
+
 
 
 export default function App() {

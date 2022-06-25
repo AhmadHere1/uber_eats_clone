@@ -15,7 +15,9 @@ const Home = ({ navigation }) => {
                 <HeaderTabs />
                 <SearchBar />
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}
+                style={{ flex: 1 }}
+            >
                 <Catagories />
                 <RestuarantItems
                     navigation={navigation}

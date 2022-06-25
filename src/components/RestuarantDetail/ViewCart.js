@@ -14,6 +14,7 @@ const ViewCart = ({ navigation }) => {
         .replace('$', ''))))
         .reduce((prev, curr) => prev + curr, 0)
     const totalUSD = total.toLocaleString('en', { style: 'currency', currency: 'USD' });
+
     const addOrderToFirebase = () => {
         const db = firebase.firestore();
         db.collection('orders').add({
@@ -25,7 +26,7 @@ const ViewCart = ({ navigation }) => {
 
         })
         setModalVisible(false);
-        // navigation.navigate("OrderComplete");
+        navigation.navigate('OrderComplete');
     };
     const checkOutModelContent = () => {
         return (
